@@ -191,127 +191,62 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-home"></i>                 
-              </span>
-              仪表盘
-            </h3>
-            <nav aria-label="breadcrumb">
-              <ul class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>Overview
-                  <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-                </li>
-              </ul>
-            </nav>
-          </div>
           <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-                  <h4 class="font-weight-normal mb-3">流量统计
-                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">{{ $pvCount }}</h2>
-                  <h6 class="card-text">PV,数据可能有浮动</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
-                  <h4 class="font-weight-normal mb-3">蜘蛛池
-                    <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">{{ $linksCount }}</h2>
-                  <h6 class="card-text">链接数量</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-success card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                                    
-                  <h4 class="font-weight-normal mb-3">用户
-                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">{{ $userCount }}</h2>
-                  <h6 class="card-text">用户数量</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-7 grid-margin stretch-card">
+            <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <div class="clearfix">
-                    <h4 class="card-title float-left">统计</h4>
-                    <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>                                     
-                  </div>
-                  <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">数据概览</h4>
-                  <canvas id="traffic-chart"></canvas>
-                  <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>                                                      
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">TOP 5</h4>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>
-                            用户
-                          </th>
-                          <th>
-                            地址
-                          </th>
-                          <th>
-                            状态
-                          </th>
-                          <th>
-                            访问量
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($userList as $userItem)
-                        <tr>
-                          <td>
-                            <img src="{{ $userList->avatar }}" class="mr-2" alt="image">
-                            {{ $userList->username }}
-                          </td>
-                          <td>
-                            {{ $userList->link }}
-                          </td>
-                          <td>
-                            <label class="badge badge-{{ $userList->status }}">{{ $userList->status }}</label>
-                            <!-- done -->
-                          </td>
-                          <td>
-                            {{ $userList->pv }}
-                          </td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
+                  <h4 class="card-title">所有链接</h4>
+                  <p class="card-description">
+                    tips: <code>请点击编辑按钮编辑该链接</code>
+                  </p>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>
+                          所在分类
+                        </th>
+                        <th>
+                          所属用户
+                        </th>
+                        <th>
+                          链接状态
+                        </th>
+                        <th>
+                          连接名
+                        </th>
+                        <th>
+                          链接地址
+                        </th>
+                        <th>
+                          操作
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($linkList as $linkItem)
+                      <tr>
+                        <td class="py-1">
+                          {{ $linkList->category }}
+                        </td>
+                        <td>
+                          {{ $linkList->user }}
+                        </td>
+                        <td>
+                          <label class="badge badge-{{ $linkList->status }}">{{ $linkList->status }}</label>
+                        </td>
+                        <td>
+                          {{ $linkList->linkName }}
+                        </td>
+                        <td>
+                          {{ $linkList->linkUrl }}
+                        </td>
+                        <td>
+                          <a href="/admin/user/{{ $linkList->id }}" class="btn btn-gradient-primary btn-sm">编辑</a>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
