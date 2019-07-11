@@ -17,7 +17,7 @@
                 <img src="admin/images/logo.svg">
               </div>
               <h4>登录 - {{ $siteName }}</h4>
-              <form class="pt-3">
+              <form class="pt-3" action="/login/check">
                 <div class="form-group">
                   <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
                 </div>
