@@ -25,4 +25,4 @@
 
 ## 程序展示
 
-![Pollos](https://i.loli.net/2019/07/16/5d2d8356d1c4391800.png)
+![Pollos](https://s2.ax1x.com/2019/07/16/ZHlqXD.png)
