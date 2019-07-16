@@ -5,4 +5,5 @@
 <!-- inject:js -->
 <script src="admin/js/off-canvas.js"></script>
 <script src="admin/js/misc.js"></script>
+<!-- End custom js for this page-->
 <!-- endinject -->

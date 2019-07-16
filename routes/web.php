@@ -17,4 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login','Admin\LoginController@login');
+Route::get('/register','Admin\LoginController@register');
+Route::post('/vlogin','Auth\LoginController@login');
+Route::post('/vregister','Auth\LoginController@register');
+Route::get('/indexone','Admin\IndexoneController@index');
+Route::get('/loginout','Controller@loginOut');

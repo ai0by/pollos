@@ -11,12 +11,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\HeaderBag;
 
 class LoginController extends Controller{
     public function __construct(){
     }
 //    登录
     public function login(){
+        if (Session::has('username')) exit('<script>location.href="/indexone"</script>');
         $siteName = $this->objectToArray(DB::table('setting')->where(['key' => 'siteName'])->select('value')->first());
         return view('admin.login',[
             'siteName' => $siteName['value'],
@@ -24,20 +26,10 @@ class LoginController extends Controller{
     }
 //    注册
     public function register(){
+        if (Session::has('username')) exit('<script>location.href="/indexone"</script>');
         $siteName = $this->objectToArray(DB::table('setting')->where(['key' => 'siteName'])->select('value')->first());
         return view('admin.register',[
             'siteName' => $siteName['value'],
         ]);
-    }
-
-    public function objectToArray($e)
-    {
-        $e = (array)$e;
-        foreach ($e as $k => $v) {
-            if (gettype($v) == 'resource') return;
-            if (gettype($v) == 'object' || gettype($v) == 'array')
-                $e[$k] = (array)$this->objectToArray($v);
-        }
-        return $e;
     }
 }
