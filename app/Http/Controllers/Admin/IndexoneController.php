@@ -34,9 +34,9 @@ class IndexoneController extends Controller{
         }
         $userList = $this->objectToArray(DB::table('links')->leftJoin('user','user.id','=','links.userid')
             ->select('user.avatar', 'user.username','links.url','user.status','links.visit','links.name')->orderBy('visit','DESC')->get(5)->toArray());
-        $userDefault = $this->objectToArray(DB::table('user')->where(['usergroup' => '1'])->count());
-        $userFlow = $this->objectToArray(DB::table('user')->where(['usergroup' => '2'])->count());
-        $userAd = $this->objectToArray(DB::table('user')->where(['usergroup' => '3'])->count());
+        $userDefault = $this->objectToArray(DB::table('user_role')->where(['roleid' => '2'])->count());
+        $userFlow = $this->objectToArray(DB::table('user_role')->where(['roleid' => '3'])->count());
+        $userAd = $this->objectToArray(DB::table('user_role')->where(['roleid' => '4'])->count());
         return view('admin.index',[
             'siteName' => $siteName['value'],
             'username' => $userData['username'],
