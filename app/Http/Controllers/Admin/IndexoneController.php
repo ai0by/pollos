@@ -38,6 +38,7 @@ class IndexoneController extends Controller{
         $userFlow = $this->objectToArray(DB::table('user_role')->where(['roleid' => '3'])->count());
         $userAd = $this->objectToArray(DB::table('user_role')->where(['roleid' => '4'])->count());
         return view('admin.index',[
+            'navList' => $this->getMenu($userData),
             'siteName' => $siteName['value'],
             'username' => $userData['username'],
             'messageNum' => $messageNum[0],

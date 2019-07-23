@@ -23,3 +23,7 @@ Route::post('/vlogin','Auth\LoginController@login');
 Route::post('/vregister','Auth\LoginController@register');
 Route::get('/indexone','Admin\IndexoneController@index');
 Route::get('/loginout','Controller@loginOut');
+//权限管理
+Route::get('/admin/right/menuadd','Admin\RightController@addMenuView');
+Route::get('/menu','Admin\RightController@menu');  // 测试用
+Route::post('/admin/menu/add/v','Auth\RightController@addMenu');
