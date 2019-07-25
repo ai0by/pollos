@@ -3,7 +3,7 @@
 
 <head>
     <title>Pollos 网址导航 蜘蛛池 - 后台管理系统</title>
-    @include('admin.head')
+    @include('admin.Head')
 </head>
 <body>
 <div class="container-scroller">
@@ -64,7 +64,7 @@
             </div>
             <!-- content-wrapper ends -->
             <!-- partial:partials/_footer.html -->
-        @include('admin.footer')
+        @include('admin.Footer')
         <!-- partial -->
         </div>
         <!-- main-panel ends -->
@@ -99,7 +99,7 @@
         });
     }
 </script>
-@include('admin.foot')
+@include('admin.Foot')
 </body>
 
 </html>

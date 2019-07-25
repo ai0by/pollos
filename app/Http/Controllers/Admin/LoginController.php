@@ -20,7 +20,7 @@ class LoginController extends Controller{
     public function login(){
         if (Session::has('username')) exit('<script>location.href="/indexone"</script>');
         $siteName = $this->objectToArray(DB::table('setting')->where(['key' => 'siteName'])->select('value')->first());
-        return view('admin.login',[
+        return view('admin.Login',[
             'siteName' => $siteName['value'],
         ]);
     }
@@ -28,7 +28,7 @@ class LoginController extends Controller{
     public function register(){
         if (Session::has('username')) exit('<script>location.href="/indexone"</script>');
         $siteName = $this->objectToArray(DB::table('setting')->where(['key' => 'siteName'])->select('value')->first());
-        return view('admin.register',[
+        return view('admin.Register',[
             'siteName' => $siteName['value'],
         ]);
     }

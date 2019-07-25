@@ -9,7 +9,7 @@
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
                     <span class="font-weight-bold mb-2">{{ $username }}</span>
-                    <span class="text-secondary text-small">{{ $userId }}</span>
+                    <span class="text-secondary text-small">用户ID: {{ $userId+10000 }}</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>

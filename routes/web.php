@@ -27,3 +27,5 @@ Route::get('/loginout','Controller@loginOut');
 Route::get('/admin/right/menuadd','Admin\RightController@addMenuView');
 Route::get('/menu','Admin\RightController@menu');  // 测试用
 Route::post('/admin/menu/add/v','Auth\RightController@addMenu');
+
+Route::get('/admin/right/view/{catId?}','Admin\RightController@right');

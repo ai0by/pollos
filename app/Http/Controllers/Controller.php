@@ -34,34 +34,4 @@ class Controller extends BaseController
         }
         return $str;
     }
-    public function verLogin(){
-        if (!Session::has('username')){
-            exit('<script>location.href="/login"</script>');
-        }
-    }
-
-    public function loginOut(){
-        session()->flush();
-        return view('admin.loginout');
-    }
-//    获取当前用户权限菜单，配合AdminNav这个模板使用
-    public function getMenu($userData){
-        $user_role = $this->objectToArray(DB::table('role')->leftJoin('user_role','role.id','=','user_role.roleid')->where(['user_role.userid'=>$userData['id']])->get()->toArray())[0];
-        $user_menu = $this->objectToArray(DB::table('menu')->leftJoin('menu_role','menu.id','=','menu_role.menuid')->where(['menu_role.roleid'=>$user_role['roleid']])->get()->toArray());
-        $menuArr = array();
-        for ($i = 0;$i<count($user_menu);$i++){
-            if ($user_menu[$i]['menu_cat_id'] == 1){
-                $menuArr[$i] = $user_menu[$i];
-                $m = 0;
-                for ($j = 0;$j<count($user_menu);$j++){
-                    if ($user_menu[$j]['menu_cat_id']==$menuArr[$i]['id']){
-                        $menuArr[$i][$m] = $user_menu[$j];
-                        $m++;
-                    }
-                }
-                $menuArr[$i]['size'] = $m;
-            }
-        }
-        return $menuArr;
-    }
 }

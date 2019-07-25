@@ -7,20 +7,18 @@
  */
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-class IndexoneController extends Controller{
+class IndexoneController extends AdminController {
 
     public function index(){
-        $this->verLogin();
+        $userData = $this->getUserData();
         $siteName = $this->objectToArray(DB::table('setting')->where(['key' => 'siteName'])->select('value')->first());
-        $userData = $this->objectToArray(DB::table('user')->where(['username' => Session::get('username')])->first());
-        $messageNum = $this->objectToArray(DB::table('message')->where(['userid' => $userData['id']])->count());
-        $messageList = $this->objectToArray(DB::table('message')->where(['userid' => $userData['id']])->get()->toArray());
+        $messageData = $this->getMessageData($userData['id']);
         $tending = $this->objectToArray(DB::table('links')->where(['userid' => $userData['id']])->count());
         $links = $this->objectToArray(DB::table('links')->where(['userid' => $userData['id']])->get()->toArray());
         $pvCount = 0;
@@ -37,12 +35,12 @@ class IndexoneController extends Controller{
         $userDefault = $this->objectToArray(DB::table('user_role')->where(['roleid' => '2'])->count());
         $userFlow = $this->objectToArray(DB::table('user_role')->where(['roleid' => '3'])->count());
         $userAd = $this->objectToArray(DB::table('user_role')->where(['roleid' => '4'])->count());
-        return view('admin.index',[
+        return view('admin.Index',[
             'navList' => $this->getMenu($userData),
             'siteName' => $siteName['value'],
             'username' => $userData['username'],
-            'messageNum' => $messageNum[0],
-            'messageList' => $messageList,
+            'messageNum' => $messageData['messageNum'][0],
+            'messageList' => $messageData['messageList'],
             'userId' => $userData['id'],
             'avatar' => $userData['avatar'],
             'is_tending' => $tending[0],
